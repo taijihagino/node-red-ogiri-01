@@ -1,0 +1,172 @@
+[
+    {
+        "id": "ac653a137cad860b",
+        "type": "tab",
+        "label": "大喜利",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e01384b3f7b1d56b",
+        "type": "debug",
+        "z": "ac653a137cad860b",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "2f2b6ef3efcb5658",
+        "type": "inject",
+        "z": "ac653a137cad860b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "2219e9f84b23091f",
+                "9bc555f6b0825c2a"
+            ]
+        ]
+    },
+    {
+        "id": "2219e9f84b23091f",
+        "type": "http request",
+        "z": "ac653a137cad860b",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://es-lab.jp/data/CsvSample.csv",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "1a27560e5abf02c1"
+            ]
+        ]
+    },
+    {
+        "id": "1a27560e5abf02c1",
+        "type": "csv",
+        "z": "ac653a137cad860b",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "9bcc3c7b3e9e9f31"
+            ]
+        ]
+    },
+    {
+        "id": "9bcc3c7b3e9e9f31",
+        "type": "split",
+        "z": "ac653a137cad860b",
+        "name": "Split array",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": "1",
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "3d8a6799acc5b296"
+            ]
+        ]
+    },
+    {
+        "id": "3d8a6799acc5b296",
+        "type": "switch",
+        "z": "ac653a137cad860b",
+        "name": "",
+        "property": "payload.col1",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "today",
+                "vt": "global"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "e01384b3f7b1d56b"
+            ]
+        ]
+    },
+    {
+        "id": "9bc555f6b0825c2a",
+        "type": "change",
+        "z": "ac653a137cad860b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "today",
+                "pt": "global",
+                "to": "$fromMillis($millis(),'[Y0001]/[M01]/[D01]')",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    }
+]
