@@ -7,6 +7,8 @@ https://node-red.connpass.com/event/257963/
 フロー全体のイメージはこんな感じで仕上げました。
 <img width="821" alt="Screen Shot 2022-09-29 at 16 03 19" src="https://user-images.githubusercontent.com/12064399/192963127-dd1648c6-6a8e-45c7-ba31-205ac083fcc9.png">
 
+フローのJSONファイルは(こちら)[https://github.com/taijihagino/node-red-ogiri-01/blob/main/flows.json]から取得いただけます。
+
 ## 各ノードの解説
 まずInjectノードです。こちらはデフォルトのままタイムスタンプを送信します。
 
